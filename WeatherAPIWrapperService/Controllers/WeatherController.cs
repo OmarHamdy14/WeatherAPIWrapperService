@@ -19,9 +19,9 @@ namespace WeatherAPIWrapperService.Controllers
         public async Task<IActionResult> GetWeatherByDynamicDate(string city, string DynamicDate)
         {
             if (string.IsNullOrEmpty(city)) return BadRequest(new { Message = "You should assign a city." });
-
             var res = await _weatherService.GetWeatherByDynamicDate(city,DynamicDate);
-            return Ok(res);
+            if(res!=null) return Ok(res);
+            return Ok(new { Message = "Something went wrong." });
         }
         [HttpGet("GetWeatherOfSpecificDate/{city}/{date}")]
         public async Task<IActionResult> GetWeatherOfSpecificDate(string city, DateOnly date)
@@ -30,7 +30,8 @@ namespace WeatherAPIWrapperService.Controllers
             if (date == null) return BadRequest(new { Message = "Invalid date." });
 
             var res = await _weatherService.GetWeatherOfSpecificDate(city, date);
-            return Ok(res);
+            if (res != null) return Ok(res);
+            return Ok(new { Message = "Something went wrong." });
         }
         [HttpGet("GetWeatherWithDateRange")]
         public async Task<IActionResult> GetWeatherWithDateRange(WeatherWithDateRangeDTO model)
@@ -42,7 +43,8 @@ namespace WeatherAPIWrapperService.Controllers
                 if (model.startDate > model.endDate) return BadRequest(new { Message = "The start date must be earlier than the end date." });
 
                 var res = await _weatherService.GetWeatherWithDateRange(model.city, model.startDate, model.endDate);
-                return Ok(res);
+                if (res != null) return Ok(res);
+                return Ok(new { Message = "Something went wrong." });
             }
             else return BadRequest(ModelState);
         }

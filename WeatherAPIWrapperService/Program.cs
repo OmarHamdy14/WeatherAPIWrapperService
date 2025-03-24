@@ -23,7 +23,7 @@ namespace WeatherAPIWrapperService
                 client.BaseAddress = new Uri("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
-            
+            builder.Services.AddMemoryCache();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

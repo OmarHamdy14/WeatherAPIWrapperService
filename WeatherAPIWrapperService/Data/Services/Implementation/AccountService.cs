@@ -37,9 +37,5 @@ namespace WeatherAPIWrapperService.Data.Services.Implementation
             var res = await _userManager.AddToRoleAsync(user, role);
             return res;
         }
-        public async Task CreateToken()
-        {
-
-        }
     }
 }

@@ -58,7 +58,7 @@ namespace WeatherAPIWrapperService.Controllers
             }
             return BadRequest(ModelState);
         }
-        [HttpGet("Logout")]
+        [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
             Response.Cookies.Delete("UserName");
